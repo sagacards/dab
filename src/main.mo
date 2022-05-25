@@ -175,6 +175,10 @@ shared ({ caller = creator }) actor class TarotDAB () : async Registry.DabRegist
         _Registry.get(principal);
     };
 
+    public query func getAll () : async [Registry.Metadata] {
+        _Registry.getAll();
+    };
+
     public shared ({ caller }) func add (
         metadata : Registry.Metadata,
     ) : async Registry.Response {
