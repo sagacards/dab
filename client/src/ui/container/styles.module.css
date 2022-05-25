@@ -1,0 +1,19 @@
+.root {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 16px;
+}
+
+.standard {
+    max-width: 1400px;
+}
+
+.narrow {
+    max-width: 1000px;
+}

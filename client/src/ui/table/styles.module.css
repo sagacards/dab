@@ -1,0 +1,15 @@
+.root {
+    width: 100%;
+    text-align: center;
+}
+
+.root td,
+.root th {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--chrome-2);
+}
+
+.root th {
+    font-family: cardo;
+    font-size: 20px;
+}

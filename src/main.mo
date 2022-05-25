@@ -191,4 +191,7 @@ shared ({ caller = creator }) actor class TarotDAB () : async Registry.DabRegist
         _Registry.remove(caller, principal);
     };
 
+
+    // TODO: serve get and getAll via HTTP
+
 };

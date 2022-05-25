@@ -13,3 +13,4 @@ pushd ./.harness/actors/interface
     done
 popd
 rm -r src/declarations
+cp -r ./.harness/actors/interface ./client/src/api/tarot-dab

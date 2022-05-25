@@ -31,26 +31,6 @@ export interface DailyMetricsData {
   'canisterMemorySize' : NumericEntity,
   'timeMillis' : bigint,
 }
-export interface TarotDAB {
-  'add' : ActorMethod<[Metadata], Response>,
-  'addAdmin' : ActorMethod<[Principal], undefined>,
-  'collectCanisterMetrics' : ActorMethod<[], undefined>,
-  'get' : ActorMethod<[Principal], [] | [Metadata]>,
-  'getAdmins' : ActorMethod<[], Array<Principal>>,
-  'getCanisterLog' : ActorMethod<
-    [[] | [CanisterLogRequest]],
-    [] | [CanisterLogResponse],
-  >,
-  'getCanisterMetrics' : ActorMethod<
-    [GetMetricsParameters],
-    [] | [CanisterMetrics],
-  >,
-  'isAdmin' : ActorMethod<[Principal], boolean>,
-  'name' : ActorMethod<[], string>,
-  'ping' : ActorMethod<[], string>,
-  'remove' : ActorMethod<[Principal], Response>,
-  'removeAdmin' : ActorMethod<[Principal], undefined>,
-}
 export type DetailValue = { 'I64' : bigint } |
   { 'U64' : bigint } |
   { 'Vec' : Array<DetailValue> } |
@@ -112,5 +92,26 @@ export interface NumericEntity {
 }
 export type Response = { 'Ok' : [] | [string] } |
   { 'Err' : Error };
+export interface TarotDAB {
+  'add' : ActorMethod<[Metadata], Response>,
+  'addAdmin' : ActorMethod<[Principal], undefined>,
+  'collectCanisterMetrics' : ActorMethod<[], undefined>,
+  'get' : ActorMethod<[Principal], [] | [Metadata]>,
+  'getAdmins' : ActorMethod<[], Array<Principal>>,
+  'getAll' : ActorMethod<[], Array<Metadata>>,
+  'getCanisterLog' : ActorMethod<
+    [[] | [CanisterLogRequest]],
+    [] | [CanisterLogResponse],
+  >,
+  'getCanisterMetrics' : ActorMethod<
+    [GetMetricsParameters],
+    [] | [CanisterMetrics],
+  >,
+  'isAdmin' : ActorMethod<[Principal], boolean>,
+  'name' : ActorMethod<[], string>,
+  'ping' : ActorMethod<[], string>,
+  'remove' : ActorMethod<[Principal], Response>,
+  'removeAdmin' : ActorMethod<[Principal], undefined>,
+}
 export type UpdateCallsAggregatedData = Array<bigint>;
 export interface _SERVICE extends TarotDAB {}

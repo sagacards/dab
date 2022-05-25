@@ -117,6 +117,7 @@ export const idlFactory : IDL.InterfaceFactory = ({ IDL }) => {
     'collectCanisterMetrics' : IDL.Func([], [], []),
     'get' : IDL.Func([IDL.Principal], [IDL.Opt(Metadata)], ['query']),
     'getAdmins' : IDL.Func([], [IDL.Vec(IDL.Principal)], ['query']),
+    'getAll' : IDL.Func([], [IDL.Vec(Metadata)], ['query']),
     'getCanisterLog' : IDL.Func(
         [IDL.Opt(CanisterLogRequest)],
         [IDL.Opt(CanisterLogResponse)],
