@@ -1,6 +1,7 @@
 {
+  "name": "dab",
   "scripts": {
-    "test": "npx jest",
+    "test": "npx jest ./.harness",
     "test:dfx": "npm run deploy:local && npm t && dfx stop && rm -r .dfx",
     "deploy:local": "dfx start --emulator --background --clean && .scripts/deploy",
     "interface": "./.scripts/copy-interface",

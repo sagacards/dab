@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+admin=$(npx ts-node .harness/keys/get.ts admin)
+dfx canister call tarot-dab addAdmin "principal \"$admin\""
