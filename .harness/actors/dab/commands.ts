@@ -9,8 +9,8 @@ import { DetailValue, Metadata } from './interface/tarot-dab/tarot-dab.did.d';
 
 const TarotDabAdmin = tarotDabActor(fetchIdentity("admin"));
 
-// Provision canisters from the authoritative google sheet.
-export async function provisionCanisters () {
+// Provision legends canisters from the authoritative google sheet.
+export async function provisionLegendsCanisters () {
     const data : string = await axios('https://docs.google.com/spreadsheets/d/10CU-7BdG5OLt_hWAVjuGl0FkRanUvODQEJPNJTj01FQ/export?format=csv').then(r => r.data);
     const headers = data.split('\n').slice(0, 1)[0].split(',');
     const rows = data.split('\n').slice(1).map(r => r.split(','));

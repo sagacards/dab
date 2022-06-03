@@ -19,6 +19,7 @@ interface Entry extends Omit<Metadata, 'details' | 'principal_id' | 'frontend'> 
 interface LegendEntry extends Entry {
     artists: string;
     principal: string;
+    isDeck: boolean;
 };
 
 
@@ -38,7 +39,10 @@ function mapDabCanister (
         description: entry.description,
         // Principal objects don't survive localstorage, so we text encode here.
         principal: entry.principal_id.toText(),
+        // @ts-ignore: TODO improve this
         artists: details.artists.Text,
+        // @ts-ignore: TODO improve this
+        isDeck: details?.isDeck?.Text === 'true',
     }
 };
 

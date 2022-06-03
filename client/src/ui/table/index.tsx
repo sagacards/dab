@@ -34,6 +34,13 @@ export default function Table (props : Props) {
             accessor: 'artists',
         },
         {
+            Header: 'Deck',
+            accessor: 'isDeck',
+            Cell ({ cell : { value } } : { cell :  { value : boolean } }) {
+                return <>{value === true ? 'Yes' : 'No'}</>
+            }
+        },
+        {
             Header: 'Buy',
             accessor: '',
             Cell (cell : any) {
