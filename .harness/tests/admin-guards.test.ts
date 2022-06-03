@@ -1,6 +1,6 @@
 import { Ed25519KeyIdentity } from '@dfinity/identity'
-import { tarotDabActor } from '../actors/actor'
-import { MetadataFactory } from '../actors/factories';
+import { tarotDabActor } from '../actors/dab/actor'
+import { MetadataFactory } from '../actors/dab/factories';
 import { fetchIdentity } from '../keys/keys';
 
 const TarotDabAnon = tarotDabActor();

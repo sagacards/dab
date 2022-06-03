@@ -1,4 +1,4 @@
-import { tarotDabActor } from '../actors/actor'
+import { tarotDabActor } from '../actors/dab/actor'
 
 const TarotDabAnon = tarotDabActor();
 

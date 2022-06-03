@@ -44,7 +44,7 @@ export default function Table (props : Props) {
         prepareRow,
     } = useTable({
         // @ts-ignore: react-table types are garb
-        columns, data
+        columns, data: data || []
     });
     return <table className={Styles.root}>
         <thead>
