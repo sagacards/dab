@@ -182,6 +182,12 @@ shared ({ caller = creator }) actor class TarotDAB () : async Registry.DabRegist
     public shared ({ caller }) func add (
         metadata : Registry.Metadata,
     ) : async Registry.Response {
+        _Registry.add(caller, [metadata]);
+    };
+
+    public shared ({ caller }) func adds (
+        metadata : [Registry.Metadata],
+    ) : async Registry.Response {
         _Registry.add(caller, metadata);
     };
 

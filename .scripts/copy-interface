@@ -2,8 +2,8 @@
 
 dfx generate
 
-cp -r src/declarations/* ./.harness/actors/interface
-pushd ./.harness/actors/interface
+cp -r src/declarations/* ./.harness/actors/dab/interface
+pushd ./.harness/actors/dab/interface
     rm **/index.js
     rm **/*.did
     for f in **/*.js; do
@@ -13,4 +13,4 @@ pushd ./.harness/actors/interface
     done
 popd
 rm -r src/declarations
-cp -r ./.harness/actors/interface ./client/src/api/tarot-dab
+cp -r ./.harness/actors/dab/interface ./client/src/api/tarot-dab

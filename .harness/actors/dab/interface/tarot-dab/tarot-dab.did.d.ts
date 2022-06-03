@@ -95,6 +95,7 @@ export type Response = { 'Ok' : [] | [string] } |
 export interface TarotDAB {
   'add' : ActorMethod<[Metadata], Response>,
   'addAdmin' : ActorMethod<[Principal], undefined>,
+  'adds' : ActorMethod<[Array<Metadata>], Response>,
   'collectCanisterMetrics' : ActorMethod<[], undefined>,
   'get' : ActorMethod<[Principal], [] | [Metadata]>,
   'getAdmins' : ActorMethod<[], Array<Principal>>,

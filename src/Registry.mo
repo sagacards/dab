@@ -58,14 +58,16 @@ module {
 
         public func add (
             caller : Principal,
-            metadata : Metadata,
+            metadata : [Metadata],
         ) : Response {
             // TODO: Enforce certain deck properties, isDeck property. Separate bazaar dab?
             if (not state._Admins._isAdmin(caller)) {
                 return #Err(#NotAuthorized);
             };
-            state._log(caller, "add", "ADMIN :: new canister " # Principal.toText(metadata.principal_id));
-            registry.put(metadata.principal_id, metadata);
+            for (data in metadata.vals()) {
+                state._log(caller, "add", "ADMIN :: new canister " # Principal.toText(data.principal_id));
+                registry.put(data.principal_id, data);
+            };
             #Ok(null);
         };
 

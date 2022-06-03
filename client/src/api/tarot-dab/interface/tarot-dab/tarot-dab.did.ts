@@ -114,6 +114,7 @@ export const idlFactory : IDL.InterfaceFactory = ({ IDL }) => {
   const TarotDAB = IDL.Service({
     'add' : IDL.Func([Metadata], [Response], []),
     'addAdmin' : IDL.Func([IDL.Principal], [], []),
+    'adds' : IDL.Func([IDL.Vec(Metadata)], [Response], []),
     'collectCanisterMetrics' : IDL.Func([], [], []),
     'get' : IDL.Func([IDL.Principal], [IDL.Opt(Metadata)], ['query']),
     'getAdmins' : IDL.Func([], [IDL.Vec(IDL.Principal)], ['query']),
