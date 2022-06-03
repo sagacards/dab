@@ -12,30 +12,33 @@ export default function Table (props : Props) {
     const { data } = useTarotDAB();
     const columns = React.useMemo(() => [
         {
+            Header: '',
+            accessor: 'thumbnail',
+            Cell ({ cell : { value } } : { cell :  { value : string } }) {
+                return <img width={50} height={50} src={value.replace('file/d/', 'uc?id=').replace('/view?usp=sharing', '')} />
+            }
+        },
+        {
             Header: 'Name',
             accessor: 'name',
         },
         {
             Header: 'Canister ID',
-            accessor: 'principal_id',
+            accessor: 'principal',
             Cell ({ cell : { value } } : { cell :  { value : string } }) {
                 return <Hash>{value}</Hash>
             }
         },
         {
             Header: 'Artists',
-            accessor: '',
-            Cell: '-',
-        },
-        {
-            Header: 'Homepage',
-            accessor: '',
-            Cell: '-',
+            accessor: 'artists',
         },
         {
             Header: 'Buy',
             accessor: '',
-            Cell: <><a target="_blank" href="https://bazaar.saga.cards">Bazaar</a></>,
+            Cell (cell : any) {
+                return <><a target="_blank" href={`https://bazaar.saga.cards/collection/${cell.row.original.principal}`}>Bazaar</a></>
+            },
         },
     ], []);
     const {

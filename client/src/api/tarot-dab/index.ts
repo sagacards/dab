@@ -3,25 +3,50 @@ import { persistQueryClient } from 'react-query/persistQueryClient-experimental'
 import { createWebStoragePersistor } from 'react-query/createWebStoragePersistor-experimental';
 import { Actor } from "@dfinity/agent";
 import { defaultAgent } from "stores/connect";
-import { TarotDAB } from './interface/tarot-dab.did.d';
+import { Metadata, TarotDAB } from './interface/tarot-dab.did.d';
 import { idlFactory } from './interface/tarot-dab.did';
 
 // TODO: Connect as admin and add/remove canisters
 
-// Just a plain actor we can use to make requests.
-const actor = Actor.createActor<TarotDAB>(idlFactory, {
-    agent: defaultAgent,
-    canisterId: import.meta.env.DAPP_DAB_CANISTER_ID,
-})
 
-// Retrieve all tarot NFTS.
-function getAll () {
-    return actor.getAll().then(r => r.map(x => ({
-        ...x,
-        // Principal objects don't survive localstorage, so we text encode here.
-        principal_id: x.principal_id.toText()
-    })));
+////////////
+// Types //
+//////////
+
+
+interface Entry extends Omit<Metadata, 'details' | 'principal_id' | 'frontend'> {};
+
+interface LegendEntry extends Entry {
+    artists: string;
+    principal: string;
 };
+
+
+//////////////
+// Mapping //
+////////////
+
+
+// Maps an entry from the DAB registry for use in this app.
+function mapDabCanister (
+    entry : Metadata,
+) : LegendEntry {
+    const details = Object.fromEntries(entry.details);
+    return {
+        name: entry.name,
+        thumbnail: entry.thumbnail,
+        description: entry.description,
+        // Principal objects don't survive localstorage, so we text encode here.
+        principal: entry.principal_id.toText(),
+        artists: details.artists.Text,
+    }
+};
+
+
+///////////////
+// Fetching //
+/////////////
+
 
 // We initialize a react-query client with localstorage, because the directory won't change often at all.
 export const queryClient = new QueryClient({
@@ -37,6 +62,23 @@ persistQueryClient({
     queryClient,
     persistor: localStoragePersistor,
 });
+
+// Just a plain actor we can use to make requests.
+const actor = Actor.createActor<TarotDAB>(idlFactory, {
+    agent: defaultAgent,
+    canisterId: import.meta.env.DAPP_DAB_CANISTER_ID,
+})
+
+// Retrieve all tarot NFTS.
+function getAll () {
+    return actor.getAll().then(r => r.map(mapDabCanister));
+};
+
+
+////////////
+// Hooks //
+//////////
+
 
 // The hook providing our tarot NFT registry.
 export function useTarotDAB() {
