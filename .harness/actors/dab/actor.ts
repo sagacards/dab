@@ -12,6 +12,7 @@ dotenv.config({
 });
 
 const canisters = JSON.parse(readFileSync(`${__dirname}/../../../.dfx/local/canister_ids.json`).toString());
+const canistersIC = JSON.parse(readFileSync(`${__dirname}/../../../canister_ids.json`).toString());
 
 export function createActor<T>(canisterId: string | Principal, idlFactory: IDL.InterfaceFactory, options: HttpAgentOptions) : ActorSubclass<T> {
     const agent = new HttpAgent({
@@ -30,7 +31,11 @@ export function createActor<T>(canisterId: string | Principal, idlFactory: IDL.I
     });
 };
 
-export function tarotDabActor (identity?: Identity) : ActorSubclass<_SERVICE> {
-    return createActor(canisters['tarot-dab'].local, idlFactory, { identity });
+export function tarotDabActor (
+    identity?: Identity,
+    network: 'ic' | 'local' = 'local',
+) : ActorSubclass<_SERVICE> {
+    const canisterId = network === 'local' ? canisters['tarot-dab'].local : canistersIC['tarot-dab'].ic;
+    return createActor(canisterId, idlFactory, { identity, host: network === 'local' ? 'http://localhost:8000' : 'https://ic0.app' });
 };
 
